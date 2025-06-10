@@ -2,7 +2,9 @@ import React from 'react'
 
 function TransactionLog() {
   return (
-    <div>TransactionLog</div>
+    <div>
+      
+    </div>
   )
 }
 
