@@ -28,7 +28,6 @@ export const signup = async (req, res) => {
       username,
       cardNumber,
       password: hashedPassword,
-      balance: user.accountBalance
     });
 
     if (newUser) {
