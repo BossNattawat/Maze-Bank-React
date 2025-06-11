@@ -101,19 +101,22 @@ export const transfer = async (req, res) => {
     sender.accountBalance -= amount;
     recipient.accountBalance += amount;
 
-    // Create both transactions
+    // Create transactions
     const senderTransaction = await Transaction.create({
       userId: sender._id,
       type: "TRANSFER",
+      to: recipient._id,
       amount,
     });
 
     const recipientTransaction = await Transaction.create({
       userId: recipient._id,
       type: "TRANSFER",
+      to: recipient._id, // Show where it came from
       amount,
     });
 
+    // Save transaction history
     sender.transactionHistory.push(senderTransaction._id);
     recipient.transactionHistory.push(recipientTransaction._id);
 
@@ -130,3 +133,18 @@ export const transfer = async (req, res) => {
     sendError(res, 500, "Internal server error.");
   }
 };
+
+
+export const getTransactionLog = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const logs = await Transaction.find({ userId: userId })
+
+    res.status(200).json(logs)
+  }
+  catch (error) {
+    console.error("Transfer error:", error);
+    sendError(res, 500, "Internal server error.");
+  }
+}

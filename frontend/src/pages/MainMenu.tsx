@@ -15,7 +15,7 @@ export default function Home() {
           <Button title="Deposit" to="/deposit" />
           <Button title="Withdraw" to="/withdraw" />
           <Button title="Transfer" to="/transfer" />
-          <Button title="Transaction Log" to="/" />
+          <Button title="Transaction Log" to="/transactionlog" />
           <button
             onClick={logout}
             className="bg-linear-to-b from-red-800 to-red-600 text-2xl text-white py-3 w-full text-center rounded hover:outline-2 outline-black"

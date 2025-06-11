@@ -10,6 +10,7 @@ import Withdraw from "./pages/Withdraw"
 import { useAuthStore } from "./store/useAuthStore"
 import { Loader } from "lucide-react"
 import Transfer from "./pages/Transfer"
+import TransactionLog from "./pages/TransactionLog"
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/deposit" element={authUser ? <Deposit/> : <Navigate to="/login"/>}/>
                 <Route path="/withdraw" element={authUser ? <Withdraw/> : <Navigate to="/login"/>}/>
                 <Route path="/transfer" element={authUser ? <Transfer/> : <Navigate to="/login"/>}/>
+                <Route path="/transactionlog" element={authUser ? <TransactionLog/> : <Navigate to="/login"/>}/>
               </Routes>
               <Toaster/>
             </div>

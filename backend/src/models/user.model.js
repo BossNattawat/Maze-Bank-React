@@ -5,6 +5,7 @@ const { Schema, model, Types } = mongoose;
 const transactionSchema = new Schema({
   userId: { type: Types.ObjectId, ref: "User", required: true },
   type: { type: String, required: true },
+  to: { type: Types.ObjectId, ref: "User" },
   amount: { type: Number, required: true },
   createdAt: { type: Date, default: Date.now },
 });

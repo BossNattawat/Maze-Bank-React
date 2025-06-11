@@ -7,13 +7,23 @@ interface Data {
     amount: number
 }
 
+interface Log {
+    _id: string
+    amount: number
+    to?: string
+    type: string
+}
+
 interface Store {
+    logs: Log[]
     deposit: (amount: number) => void
     withdraw: (amount: number) => void
     transfer: (data: Data) => void
+    getTransactionLog: () => void
 }
 
-export const useActionStore = create<Store>(() => ({
+export const useActionStore = create<Store>((set) => ({
+    logs: [],
     deposit: async (amount) => {
         try {
             await axiosInstance.put("/action/deposit", { amount })
@@ -42,6 +52,18 @@ export const useActionStore = create<Store>(() => ({
         try {
             await axiosInstance.put("/action/transfer", data)
             toast.success("Transfer successful")
+        }
+        catch(err) {
+            if (err instanceof Error) {
+                toast.error(err.message)
+            }
+        }
+    },
+
+    getTransactionLog: async () => {
+        try {
+            const res = await axiosInstance.get("/action/transactionlog")
+            set({ logs: res.data })
         }
         catch(err) {
             if (err instanceof Error) {

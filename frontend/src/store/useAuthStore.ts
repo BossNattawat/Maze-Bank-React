@@ -3,7 +3,7 @@ import { axiosInstance } from "../lib/axios"
 import toast from "react-hot-toast"
 
 interface User {
-    id: string
+    _id: string
     username: string
     cardNumber: string
     accountBalance: number
